@@ -2,18 +2,26 @@ import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
 import matplotlib.lines as mpllines
+from scipy import constants
 
+# style
 plt.style.use("seaborn")
 sns.set(style="ticks")
-
-fig, ax = plt.subplots()
 LINECOLOR = sns.color_palette("Blues")[-1]
 
+# def
+def mum2GHz(arr_mum:np.ndarray) -> np.ndarray:
+    return(constants.c / arr_mum * 1e-3)
+
+# data
+# change me
 from load import data
+# ====================
 
 almadat = data["ALMA"].T
-sensitivity = [0.5 + 0.01*(-1)**n for n, _ in enumerate(almadat)] #fake
+sensitivity = [0.5 + 0.03*(-1)**n for n, _ in enumerate(almadat)] #fake
 
+fig, ax = plt.subplots()
 
 for xkey, color, marker in zip(
         ["lambda min", "lambda max"],
@@ -44,6 +52,16 @@ ax.set_xlim(
     1.2*max(data["ALMA"]["lambda max"])
 )
 ax.set_ylim(0, 1)
-ax.set_xscale("log")
 ax.set_xlabel(r"$\lambda$ [µm]")
+
+# secondary x axis for frequencies
+axb = ax.twiny()
+axb.set_xlim(mum2GHz(np.array(ax.get_xlim())))
+axb.set_xlabel(r"$\nu$ [GHz]")
+
+# scaling
+for a in (ax, axb):
+    a.set_xscale("log")
+
+# save
 fig.savefig("output.pdf")
