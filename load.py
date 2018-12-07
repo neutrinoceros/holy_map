@@ -9,11 +9,12 @@ def csvdat(name:str) -> pd.DataFrame:
 
 data = {key: csvdat(key) for key in {'ALMA', 'IR bands'}}
 
-for name, df in data.items():
-    print(name)
-    print('-' * len(name))
-    print(df)
-    print()
+if __name__ == "__main__":
+    for name, df in data.items():
+        print(name)
+        print('-' * len(name))
+        print(df)
+        print()
 
-print(data["ALMA"].T["Band 1"])
-print(type(data["ALMA"].T["Band 1"]["lambda min"]))
+    print(data["ALMA"].T["Band 1"])
+    print(type(data["ALMA"].T["Band 1"]["lambda min"]))

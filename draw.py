@@ -7,13 +7,12 @@ plt.style.use("seaborn")
 sns.set(style="ticks")
 
 fig, ax = plt.subplots()
-Y0=0.5
 LINECOLOR = sns.color_palette("Blues")[-1]
 
 from load import data
 
 almadat = data["ALMA"].T
-sensitivity = [0.5 + 0.1*(-1)**n for n, _ in enumerate(almadat)] #fake
+sensitivity = [0.5 + 0.01*(-1)**n for n, _ in enumerate(almadat)] #fake
 
 
 for xkey, color, marker in zip(
