@@ -1,0 +1,5 @@
+band,lambda min,lambda max,comment
+Band 1,6.0e3,8.0e3,not vail as of cycle 5
+Band 2,3.3e3,4.6e3,not vail as of cycle 5
+Band 3,2.6e3,3.6e3,
+Band 4,1.8e3,2.4e3,
