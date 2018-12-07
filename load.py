@@ -4,10 +4,13 @@ import pandas as pd
 datadir = Path(__file__).parent.resolve() / "data"
 def filepath(name:str) -> Path:
     return datadir / f"Holy Map - {name}.csv"
-def csvdat(name:str) -> pd.DataFrame:
-    return pd.read_csv(filepath(name), index_col=0)
+def load_sheet(name:str) -> pd.DataFrame:
+    return pd.read_csv(
+        filepath(name), index_col=0,
+        dtype={"lambda min": float, "lambda max": float, "comment": str}
+    )
 
-data = {key: csvdat(key) for key in {'ALMA', 'IR bands'}}
+data = {key: load_sheet(key) for key in {'ALMA', 'IR bands'}}
 
 if __name__ == "__main__":
     for name, df in data.items():
