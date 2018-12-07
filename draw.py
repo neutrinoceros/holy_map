@@ -17,7 +17,7 @@ def mum2GHz(arr_mum:np.ndarray) -> np.ndarray:
 # main data struct
 datasets = {
     'ALMA': sns.color_palette("Reds"),
-    'IR bands': sns.color_palette("Blues"),
+    'IR-Bands': sns.color_palette("Blues"),
 }
 
 
