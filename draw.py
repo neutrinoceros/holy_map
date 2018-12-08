@@ -50,8 +50,17 @@ def main():
         powlims[0] = min(powlims[0], np.log10(min(ds.T["lambda min"])))
         powlims[1] = max(powlims[1], np.log10(max(ds.T["lambda max"])))
 
+    # add visible spectrum
+    xblue = 4e5
+    xred  = 8e5
+    ylim = (0, 1)
+    xv = np.linspace(xblue, xred, 1000)
+    yv = np.linspace(*ylim, 2)
+    xg, yg = np.meshgrid(xv, yv)
+    ax.pcolormesh(xg, yg, xg, cmap="gist_rainbow", zorder=0, alpha=0.5)
+
     # to update
-    ax.set_xlim(0.8*10**powlims[0], 1.2*10**powlims[1])
+    ax.set_xlim(min(xblue, 0.8*10**powlims[0]), max(1.2*10**powlims[1], xred))
     ax.set_ylim(0, 1)
     ax.set_xlabel(r"$\lambda$ [µm]")
 
