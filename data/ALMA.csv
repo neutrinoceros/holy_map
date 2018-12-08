@@ -1,6 +1,6 @@
 band,lambda min,lambda max,comment
-Band 1,6000.0,8000.0,not vail as of cycle 5
-Band 2,3300.0,4600.0,not vail as of cycle 5
+Band 1*,6000.0,8000.0,not vail as of cycle 5
+Band 2*,3300.0,4600.0,not vail as of cycle 5
 Band 3,2600.0,3600.0,
 Band 4,1800.0,2400.0,
 Band 5,1400.0,1800.0,
