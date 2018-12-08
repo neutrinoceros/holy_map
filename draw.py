@@ -51,8 +51,8 @@ def main():
         powlims[1] = max(powlims[1], np.log10(max(ds.T["lambda max"])))
 
     # add visible spectrum
-    xblue = 4e5
-    xred  = 8e5
+    xblue = 0.4
+    xred  = 0.8
     ylim = (0, 1)
     xv = np.linspace(xblue, xred, 1000)
     yv = np.linspace(*ylim, 2)
