@@ -57,7 +57,7 @@ def main():
     xv = np.linspace(xblue, xred, 1000)
     yv = np.linspace(*ylim, 2)
     xg, yg = np.meshgrid(xv, yv)
-    ax.pcolormesh(xg, yg, xg, cmap="gist_rainbow", zorder=0, alpha=0.5)
+    ax.pcolormesh(xg, yg, xg, cmap="gist_rainbow_r", zorder=0, alpha=0.5)
 
     # to update
     ax.set_xlim(min(xblue, 0.8*10**powlims[0]), max(1.2*10**powlims[1], xred))
