@@ -25,8 +25,8 @@ def get_middle(xmin:float, xmax:float) -> float:
     """Return the middle point of a segment"""
     return xmin + (xmax - xmin)/2
 
-def draw_span(ax, xmin:float, xmax:float, y:float=0.8, epsy:float=0.05, name:str="") -> None:
-    if ax.get_xscale() == 'log':
+def draw_span(ax, xmin:float, xmax:float, y:float=0.8, epsy:float=0.05, name:str="", logscale=True) -> None:
+    if logscale:
         xmed = 10**(get_middle(np.log10(xmin), np.log10(xmax)))
     else:
         xmed = get_middle(xmin, xmax)
@@ -36,8 +36,7 @@ def draw_span(ax, xmin:float, xmax:float, y:float=0.8, epsy:float=0.05, name:str
     if name:
         ax.annotate(name, xytext=(xmed, y+epsy), xy=(xmax, y+epsy))
 
-
-def main():
+def main(logscale=True):
     fig, ax = plt.subplots()
     powlims = [0, 3]
     for sheetname, palette in datasets.items():
@@ -88,8 +87,9 @@ def main():
     axb.set_xlabel(r"$\nu$ [GHz]")
 
     # scaling
-    for a in (ax, axb):
-        a.set_xscale("log")
+    if logscale:
+        for a in (ax, axb):
+            a.set_xscale("log")
 
     return fig
 
