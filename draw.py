@@ -69,7 +69,7 @@ def main():
     # over plot basic domains
     Domain = namedtuple("Domain", "name xmin xmax yoffset")
     domains = [
-        Domain("IR", 0.75, 300, 0.8),
+        Domain("infrared", 0.75, 300, 0.8),
         Domain("submillimeter", 1e2, 1e3, 0.7),
         Domain("millimeter", 1e3, 1e4, 0.7),
     ]
