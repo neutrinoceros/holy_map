@@ -19,6 +19,7 @@ datasets = {
     'ALMA': sns.color_palette("Reds"),
     'IR-Bands': sns.color_palette("Blues"),
 }
+YLIM = (0, 1)
 
 
 def main():
@@ -53,15 +54,14 @@ def main():
     # add visible spectrum
     xblue = 0.4
     xred  = 0.8
-    ylim = (0, 1)
     xv = np.linspace(xblue, xred, 1000)
-    yv = np.linspace(*ylim, 2)
+    yv = np.linspace(*YLIM, 2)
     xg, yg = np.meshgrid(xv, yv)
     ax.pcolormesh(xg, yg, xg, cmap="gist_rainbow_r", zorder=0, alpha=0.5)
 
     # to update
     ax.set_xlim(min(xblue, 0.8*10**powlims[0]), max(1.2*10**powlims[1], xred))
-    ax.set_ylim(0, 1)
+    ax.set_ylim(*YLIM)
     ax.set_xlabel(r"$\lambda$ [µm]")
 
     # secondary x axis for frequencies
