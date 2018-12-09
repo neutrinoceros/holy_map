@@ -1,3 +1,4 @@
+from collections import namedtuple
 import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
@@ -74,10 +75,18 @@ def main(logscale=True):
     ax.pcolormesh(xg, yg, xg, cmap="gist_rainbow_r", zorder=0, alpha=0.5)
 
     # over plot basic domains
-    draw_span(ax, xmin=0.75, xmax=300, name="IR")
+    Domain = namedtuple("Domain", "name xmin xmax yoffset")
+    domains = [
+        Domain("IR", 0.75, 300, 0.8),
+        Domain("submillimeter", 1e2, 1e3, 0.7),
+        Domain("millimeter", 1e3, 1e4, 0.7),
+    ]
+    for d in domains:
+        draw_span(ax, xmin=d.xmin, xmax=d.xmax, y=d.yoffset, name=d.name)
+    xredest = max([d.xmax for d in domains])
 
     # to update
-    ax.set_xlim(min(xblue, 0.8*10**powlims[0]), max(1.2*10**powlims[1], xred))
+    ax.set_xlim(min(xblue, 0.8*10**powlims[0]), max(1.2*10**powlims[1], xredest))
     ax.set_ylim(*YLIM)
     ax.set_xlabel(r"$\lambda$ [µm]")
 
