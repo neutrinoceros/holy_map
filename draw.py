@@ -21,6 +21,21 @@ datasets = {
 }
 YLIM = (0, 1)
 
+def get_middle(xmin:float, xmax:float) -> float:
+    """Return the middle point of a segment"""
+    return xmin + (xmax - xmin)/2
+
+def draw_span(ax, xmin:float, xmax:float, y:float=0.8, epsy:float=0.05, name:str="") -> None:
+    if ax.get_xscale() == 'log':
+        xmed = 10**(get_middle(np.log10(xmin), np.log10(xmax)))
+    else:
+        xmed = get_middle(xmin, xmax)
+    # arrow
+    ax.annotate("", xytext=(xmin, y), xy=(xmax, y), arrowprops=dict(arrowstyle="<|-|>", color="black"))
+    # associated name
+    if name:
+        ax.annotate(name, xytext=(xmed, y+epsy), xy=(xmax, y+epsy))
+
 
 def main():
     fig, ax = plt.subplots()
@@ -58,6 +73,9 @@ def main():
     yv = np.linspace(*YLIM, 2)
     xg, yg = np.meshgrid(xv, yv)
     ax.pcolormesh(xg, yg, xg, cmap="gist_rainbow_r", zorder=0, alpha=0.5)
+
+    # over plot basic domains
+    draw_span(ax, xmin=0.75, xmax=300, name="IR")
 
     # to update
     ax.set_xlim(min(xblue, 0.8*10**powlims[0]), max(1.2*10**powlims[1], xred))
