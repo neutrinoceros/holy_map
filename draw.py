@@ -82,7 +82,7 @@ def main():
         draw_span(ax, xmin=d.xmin, xmax=d.xmax, y=d.yoffset, name=d.name)
     xredest = max([d.xmax for d in domains])
 
-    # to update
+    # set limits and labels
     ax.set_xlim(min(xblue, 0.8*10**powlims[0]), max(1.2*10**powlims[1], xredest))
     ax.set_ylim(*YLIM)
     ax.set_xlabel(r"$\lambda$ [µm]")
