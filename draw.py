@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 from collections import namedtuple
 import numpy as np
 import matplotlib.pyplot as plt
@@ -96,5 +97,16 @@ def main():
 
 # script
 if __name__ == '__main__':
+    import argparse
+    aparser = argparse.ArgumentParser()
+    aparser.add_argument("-i", "--interactive", action="store_true", default=False)
+    args = aparser.parse_args()
+
     fig = main()
+
+    if args.interactive:
+        plt.ion()
+        plt.show()
+        plt.ioff()
+        input("<Enter> to quit and save    ")
     fig.savefig("output.pdf")
