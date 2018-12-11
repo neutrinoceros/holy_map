@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 from collections import namedtuple
 import numpy as np
 import matplotlib.pyplot as plt
