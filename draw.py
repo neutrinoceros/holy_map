@@ -56,8 +56,12 @@ def main():
             ax.plot(wl, offsets[n]*np.ones(2), color=lc, zorder=1)
             ax.annotate(s=band, xy=[wl[0], offsets[n]+0.02], fontsize=8)
 
-        powlims[0] = min(powlims[0], np.log10(min(ds.T["lambda min"])))
-        powlims[1] = max(powlims[1], np.log10(max(ds.T["lambda max"])))
+        wlrange = min(ds.T["lambda min"]), max(ds.T["lambda max"])
+        powlims[0] = min(powlims[0], np.log10(wlrange[0]))
+        powlims[1] = max(powlims[1], np.log10(wlrange[1]))
+
+        # display sheet name
+        ax.annotate(s=sheetname, xy=[wlrange[0], 0.4], fontsize=12, color=palette[-1])
 
     # add visible spectrum
     xblue = 0.4
