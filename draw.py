@@ -24,8 +24,16 @@ datasets = {
 YLIM = (0, 1)
 
 def draw_span(ax, xmin:float, xmax:float, y:float=0.8, epsy:float=0.02, name:str="") -> None:
-    # arrow
-    ax.annotate("", xytext=(xmin, y), xy=(xmax, y), arrowprops=dict(arrowstyle="<|-|>", color="black"))
+    w = 3
+    arrow_style = dict(
+        shrink=0.,
+        width=w/100,
+        headwidth=w,
+        headlength=w,
+        color="black"
+    )
+    ax.annotate("", xytext=(xmin, y), xy=(xmax, y), arrowprops=arrow_style)
+    ax.annotate("", xytext=(xmax, y), xy=(xmin, y), arrowprops=arrow_style)
     # associated name
     if name:
         ax.annotate(f"   {name}", xytext=(xmin, y+epsy), xy=(xmax, y+epsy))
