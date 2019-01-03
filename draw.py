@@ -14,7 +14,7 @@ sns.set(style="ticks")
 
 # def
 def mum2GHz(arr_mum:np.ndarray) -> np.ndarray:
-    return(constants.c / arr_mum * 1e-3)
+    return constants.c / arr_mum * 1e-3
 
 # main data struct
 datasets = {
@@ -36,7 +36,7 @@ def draw_span(ax, xmin:float, xmax:float, y:float=0.8, epsy:float=0.02, name:str
     ax.annotate("", xytext=(xmax, y), xy=(xmin, y), arrowprops=arrow_style)
     # associated name
     if name:
-        ax.annotate(f"   {name}", xytext=(xmin, y+epsy), xy=(xmax, y+epsy))
+        ax.annotate(f"   {name}", xytext=(xmin, y+epsy), xy=(xmax, y+epsy), size=8)
 
 def main():
     fig, ax = plt.subplots()
@@ -83,12 +83,13 @@ def main():
     Domain = namedtuple("Domain", "name xmin xmax yoffset")
     domains = [
         Domain("infrared", 0.75, 300, 0.8),
-        Domain("submillimeter", 1e2, 1e3, 0.7),
-        Domain("millimeter", 1e3, 1e4, 0.7),
+        Domain("sub-mm", 1e2, 1e3, 0.7),
+        Domain("mm (aka EHF radio)", 1e3, 1e4, 0.7),
     ]
     for d in domains:
         draw_span(ax, xmin=d.xmin, xmax=d.xmax, y=d.yoffset, name=d.name)
     xredest = max([d.xmax for d in domains])
+    xredest = 1e4
 
     # set limits and labels
     ax.set_xlim(min(xblue, 0.8*10**powlims[0]), max(1.2*10**powlims[1], xredest))
