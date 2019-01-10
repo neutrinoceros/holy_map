@@ -110,7 +110,6 @@ def main():
 
 # script
 if __name__ == '__main__':
-<<<<<<< Updated upstream
     import argparse
     aparser = argparse.ArgumentParser()
     aparser.add_argument("-i", "--interactive", action="store_true", default=False)
