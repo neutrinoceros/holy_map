@@ -110,6 +110,7 @@ def main():
 
 # script
 if __name__ == '__main__':
+<<<<<<< Updated upstream
     import argparse
     aparser = argparse.ArgumentParser()
     aparser.add_argument("-i", "--interactive", action="store_true", default=False)
@@ -122,4 +123,6 @@ if __name__ == '__main__':
         plt.show()
         plt.ioff()
         input("<Enter> to quit and save    ")
-    fig.savefig("output.pdf")
+
+    for ext in ("pdf", "png"):
+        fig.savefig(f"holymap.{ext}")
