@@ -11,6 +11,7 @@ from load import load_sheet
 # style
 plt.style.use("seaborn")
 sns.set(style="ticks")
+sns.set_context("talk")
 
 # def
 def mum2GHz(arr_mum:np.ndarray) -> np.ndarray:
@@ -36,10 +37,10 @@ def draw_span(ax, xmin:float, xmax:float, y:float=0.8, epsy:float=0.02, name:str
     ax.annotate("", xytext=(xmax, y), xy=(xmin, y), arrowprops=arrow_style)
     # associated name
     if name:
-        ax.annotate(f"   {name}", xytext=(xmin, y+epsy), xy=(xmax, y+epsy), size=8)
+        ax.annotate(f"   {name}", xytext=(xmin, y+epsy), xy=(xmax, y+epsy))
 
 def main():
-    fig, ax = plt.subplots()
+    fig, ax = plt.subplots(figsize=(20,3.5))
     powlims = [0, 3]
     for sheetname, palette in datasets.items():
         ds = load_sheet(sheetname).T
@@ -62,14 +63,14 @@ def main():
         for n, band in enumerate(ds):
             wl = [ds[band]["lambda min"], ds[band]["lambda max"]]
             ax.plot(wl, offsets[n]*np.ones(2), color=lc, zorder=1)
-            ax.annotate(s=band, xy=[wl[0], offsets[n]+0.02], fontsize=8)
+            ax.annotate(s=band, xy=[wl[0], offsets[n]+0.02])
 
         wlrange = min(ds.T["lambda min"]), max(ds.T["lambda max"])
         powlims[0] = min(powlims[0], np.log10(wlrange[0]))
         powlims[1] = max(powlims[1], np.log10(wlrange[1]))
 
         # display sheet name
-        ax.annotate(s=sheetname, xy=[wlrange[0], 0.4], fontsize=12, color=palette[-1])
+        ax.annotate(s=sheetname, xy=[wlrange[0], 0.4], color=palette[-1])
 
     # add visible spectrum
     xblue = 0.4
@@ -105,6 +106,8 @@ def main():
     for a in (ax, axb):
         a.set_xscale("log")
 
+    ax.set_yticks([])
+
     return fig
 
 
@@ -122,6 +125,5 @@ if __name__ == '__main__':
         plt.show()
         plt.ioff()
         input("<Enter> to quit and save    ")
-
     for ext in ("pdf", "png"):
-        fig.savefig(f"holymap.{ext}")
+        fig.savefig(f"holymap.{ext}", bbox_inches="tight")
